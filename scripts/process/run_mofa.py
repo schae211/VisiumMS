@@ -334,7 +334,7 @@ for obsm_key in obsm_to_use:
         cmap = plt.get_cmap('coolwarm').copy()
         cmap.set_bad(color='gray')
         
-        if ("abunds" in obsm_key)or ("ilr" in obsm_key):
+        if ("abunds" in obsm_key) or ("ilr" in obsm_key):
             fig, ax = plt.subplots(1, 1, figsize=(6, 6), facecolor='white', dpi=125)
         else:
              fig, ax = plt.subplots(1, 1, figsize=(24, 12), facecolor='white', dpi=125)
