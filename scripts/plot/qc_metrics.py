@@ -1,20 +1,27 @@
+<<<<<<< HEAD
 
 # python scripts/plot/qc_metrics.py --output cellbender
 # python scripts/plot/qc_metrics.py --output cellranger
 
+=======
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 import numpy as np
 import pandas as pd
 import pickle
 
 import os
 import argparse
+<<<<<<< HEAD
 from pathlib import Path
+=======
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 from plotting import *
 
 """
 Script to plot different QC metrics after filtering the data.
 """
 
+<<<<<<< HEAD
 # add command line flag arguments to specify either "cellbender" or "cellranger" output
 parser = argparse.ArgumentParser()
 parser.add_argument("--output", type=str, required=True)
@@ -33,6 +40,17 @@ else:
 output_dir.mkdir(parents=True, exist_ok=True)
 
 samples = [s.split(".")[0] for s in os.listdir(input_dir) if s.endswith('.pkl')]
+=======
+# Read command line and set args
+parser = argparse.ArgumentParser(prog='qc', description='Run QC per sample')
+parser.add_argument('-i', '--input_dir', help='Input directory containing all sample directories', required=True)
+parser.add_argument('-o', '--output_dir', help='Output directory where to store the figures', required=True)
+args = vars(parser.parse_args())
+
+input_path = args['input_dir']
+output_path = args['output_dir']
+###############################
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 
 # Initialize sumary variables
 total_df = pd.DataFrame(columns=['n_genes_by_counts','total_counts',
@@ -41,9 +59,18 @@ summary_df = []
 total_n_rem = np.zeros(5)
 
 # Run QC plots for each sample and store summary
+<<<<<<< HEAD
 for sample in samples:
     print(sample)
     plot_data = pickle.load(open(input_dir / (sample + ".pkl"), "rb"))
+=======
+for sample in os.listdir(input_path):
+    path = os.path.join(input_path, sample)
+    if not os.path.isdir(path) or sample.startswith('.'):
+        continue
+    print(sample)
+    plot_data = pickle.load(open(os.path.join(path, sample+'.pkl'), "rb"))
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 
     # Filter params
     mt_thr = plot_data['mt_thr']
@@ -102,7 +129,11 @@ for sample in samples:
     fig.set_facecolor('white')
 
     # Write to png
+<<<<<<< HEAD
     fig.savefig(output_dir / ("qc_"+sample+".png"))
+=======
+    fig.savefig(os.path.join(output_path, 'qc_'+sample+'.png'))
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 
     # Append
     total_df = pd.concat([total_df, df], ignore_index=True)
@@ -131,4 +162,8 @@ fig.subplots_adjust(top=0.88)
 fig.set_facecolor('white')
 
 # Save
+<<<<<<< HEAD
 fig.savefig(output_dir / 'qc_summary.png')
+=======
+fig.savefig(os.path.join(output_path, 'qc_summary.png'))
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6

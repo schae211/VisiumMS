@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 
 # python scripts/plot/integrate_metrics.py --output cellbender
 # python scripts/plot/integrate_metrics.py --output cellranger
 
+=======
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 import scanpy as sc
 import numpy as np
 import pandas as pd
@@ -9,13 +12,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import argparse
+<<<<<<< HEAD
 from pathlib import Path
+=======
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 import os
 
 """
 Script to plot different metrics after integration.
 """
 
+<<<<<<< HEAD
 # add command line flag arguments to specify either "cellbender" or "cellranger" output
 parser = argparse.ArgumentParser()
 parser.add_argument("--output", type=str, required=True)
@@ -40,6 +47,18 @@ print("output_dir: ", output_dir)
 
 version = "0"
 
+=======
+# Read command line and set args
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--input_path', help='Input path to object', required=True)
+parser.add_argument('-v', '--version', help='Version of the merging', required=False)
+parser.add_argument('-o', '--output_dir', help='Output directory', required=True)
+args = vars(parser.parse_args())
+
+input_path = args['input_path']
+version = args['version']
+output_path = args['output_dir']
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
 ###############################
 
 # Read merged object
@@ -73,4 +92,8 @@ if version is not None:
     fname = 'integrated_summary_{0}.png'.format(version)
 else:
     fname = 'integrated_summary.png'
+<<<<<<< HEAD
 fig.savefig(os.path.join(output_dir, fname))
+=======
+fig.savefig(os.path.join(output_path, fname))
+>>>>>>> 4059a4c8e2af9c39af787ebee1439fc854d311d6
